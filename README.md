@@ -41,17 +41,17 @@ es5-shim.js to be able to work properly.
 `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
 behave as closely as possible to ECMAScript 6 (Harmony).
 
-**Version**: 1.0.0  
+**Version**: 1.0.1  
 **Author:** Xotic750 <Xotic750@gmail.com>  
 **License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
 **Copyright**: Xotic750  
 <a name="exp_module_get-function-args-x--module.exports"></a>
-### `module.exports(fn)` ⇒ <code>undefined</code> &#124; <code>string</code> ⏏
+### `module.exports(fn)` ⇒ <code>undefined</code> &#124; <code>Array</code> ⏏
 This method returns the args of the function, or `undefined` if not
 a function.
 
 **Kind**: Exported function  
-**Returns**: <code>undefined</code> &#124; <code>string</code> - The args of the function, or `undefined` if
+**Returns**: <code>undefined</code> &#124; <code>Array</code> - The args of the function, or `undefined` if
  not a function.  
 
 | Param | Type | Description |

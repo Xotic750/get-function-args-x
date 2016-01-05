@@ -41,7 +41,7 @@
  * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
  * behave as closely as possible to ECMAScript 6 (Harmony).
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -95,7 +95,7 @@
    * a function.
    *
    * @param {Function} fn The function to get the args of.
-   * @return {undefined|string} The args of the function, or `undefined` if
+   * @return {undefined|Array} The args of the function, or `undefined` if
    *  not a function.
    * @example
    * var getFunctionArgs = require('get-function-args-x');
