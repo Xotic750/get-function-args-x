@@ -38,7 +38,6 @@
             Object,
             String,
             Boolean,
-            Number,
             Array,
             Function,
             function () {},
@@ -60,7 +59,6 @@
              ){},
           ],
           expected = [
-            [],
             [],
             [],
             [],
