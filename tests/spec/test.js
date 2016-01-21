@@ -4,7 +4,7 @@
   freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
   nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
   es3:true, esnext:false, plusplus:true, maxparams:2, maxdepth:2,
-  maxstatements:11, maxcomplexity:3 */
+  maxstatements:17, maxcomplexity:5 */
 
 /*global JSON:true, expect, module, require, describe, it, returnExports */
 
@@ -40,6 +40,7 @@
             Boolean,
             Array,
             Function,
+            /* jscs:disable */
             function () {},
             /*jshint unused:false */
             function test(a) {},
@@ -56,7 +57,8 @@
             /*fum*/function/*foo*/ // blah
             test8/*bar*/ // wizz
             (/*baz*/a
-             ){},
+             ){}
+            /* jscs:enable */
           ],
           expected = [
             [],
@@ -82,15 +84,28 @@
       var fat;
       try {
         /*jshint evil:true */
-        fat = eval('(0,(x, y) => {return this})');
+        fat = new Function('return (x, y) => {return this}')();
         expect(getFunctionArgs(fat)).toEqual(['x', 'y']);
       } catch (ignore) {}
 
       var gen;
       try {
         /*jshint evil:true */
-        gen = eval('(0,function* idMaker(x, y){})');
+        gen = new Function('return function* idMaker(x, y){}')();
         expect(getFunctionArgs(gen)).toEqual(['x', 'y']);
+      } catch (ignore) {}
+
+      var classes;
+      try {
+        /*jshint evil:true */
+        classes = new Function('"use strict"; return class My {};')();
+        expect(getFunctionArgs(classes)).toEqual([]);
+      } catch (ignore) {}
+
+      try {
+        /*jshint evil:true */
+        classes = new Function('"use strict"; return class My { constructor (a,b) {} };')();
+        expect(getFunctionArgs(classes)).toEqual(['a', 'b']);
       } catch (ignore) {}
     });
   });

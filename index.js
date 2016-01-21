@@ -41,7 +41,7 @@
  * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
  * behave as closely as possible to ECMAScript 6 (Harmony).
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -54,25 +54,27 @@
   freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
   nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
   es3:true, esnext:false, plusplus:true, maxparams:2, maxdepth:1,
-  maxstatements:6, maxcomplexity:4 */
+  maxstatements:15, maxcomplexity:4 */
 
 /*global module */
 
 ;(function () {
   'use strict';
 
-  var ES = require('es-abstract/es6'),
-    fToString = Function.prototype.toString,
-    aPush = Array.prototype.push,
-    aReduce = Array.prototype.reduce,
-    sMatch = String.prototype.match,
-    sTrim = String.prototype.trim,
-    sSplit = String.prototype.split,
-    sReplace = String.prototype.replace,
-    ARROW_ARG = [/^([^\(]+?)=>/],
-    FN_ARGS = [/^[^\(]*\(\s*([^\)]*)\)/m],
-    STRIP_COMMENTS = [/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg, ''],
-    SPLIT_COMMA = [','];
+  var isFunction = require('is-function-x');
+  var fToString = Function.prototype.toString;
+  var aPush = Array.prototype.push;
+  var aReduce = Array.prototype.reduce;
+  var sMatch = String.prototype.match;
+  var sTrim = String.prototype.trim;
+  var sSplit = String.prototype.split;
+  var sReplace = String.prototype.replace;
+  var ARROW_ARG = /^([^\(]+?)=>/;
+  var FN_ARGS = new RegExp(
+    '^[^\\(]*\\([' + require('white-space-x')(false, true) + ']*([^\\)]*)\\)',
+    'm'
+  );
+  var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 
   /**
    * The reduce mapper.
@@ -83,9 +85,9 @@
    * @return {Array} The args of the function.
    */
   function mapper(acc, arg) {
-    var a = ES.Call(sTrim, arg);
+    var a = sTrim.call(arg);
     if (a) {
-      ES.Call(aPush, acc, [a]);
+      aPush.call(acc, a);
     }
     return acc;
   }
@@ -111,14 +113,11 @@
    * getFunctionArgs(function test(a, b) {}); // ['a', 'b']
    */
   module.exports = function getFunctionArgs(fn) {
-    var str, match;
-    if (!ES.IsCallable(fn)) {
+    if (!isFunction(fn)) {
       return;
     }
-    str = ES.Call(sReplace, ES.Call(fToString, fn), STRIP_COMMENTS);
-    match = ES.Call(sMatch, str, ARROW_ARG) || ES.Call(sMatch, str, FN_ARGS);
-    return match ?
-      ES.Call(aReduce, ES.Call(sSplit, match[1], SPLIT_COMMA), [mapper, []]) :
-      [];
+    var str = sReplace.call(fToString.call(fn), STRIP_COMMENTS, ' ');
+    var match = sMatch.call(str, ARROW_ARG) || sMatch.call(str, FN_ARGS);
+    return match ? aReduce.call(sSplit.call(match[1], ','), mapper, []) : [];
   };
 }());
