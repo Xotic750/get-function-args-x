@@ -41,7 +41,7 @@
  * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
  * behave as closely as possible to ECMAScript 6 (Harmony).
  *
- * @version 1.0.7
+ * @version 1.0.8
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -71,7 +71,7 @@
   var sReplace = String.prototype.replace;
   var ARROW_ARG = /^([^\(]+?)=>/;
   var FN_ARGS = new RegExp(
-    '^[^\\(]*\\([' + require('white-space-x')(false, true) + ']*([^\\)]*)\\)',
+    '^[^\\(]*\\([' + require('white-space-x').ws + ']*([^\\)]*)\\)',
     'm'
   );
   var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
