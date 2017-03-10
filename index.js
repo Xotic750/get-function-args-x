@@ -41,24 +41,27 @@
  * `es6.shim.js` provides compatibility shims so that legacy JavaScript engines
  * behave as closely as possible to ECMAScript 6 (Harmony).
  *
- * @version 1.0.9
+ * @version 1.1.0
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
  * @module get-function-args-x
  */
 
-/*jslint maxlen:80, es6:false, white:true */
+/* jslint maxlen:80, es6:true, white:true */
 
-/*jshint bitwise:true, camelcase:true, curly:true, eqeqeq:true, forin:true,
-  freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
-  nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
-  es3:true, esnext:false, plusplus:true, maxparams:2, maxdepth:1,
-  maxstatements:15, maxcomplexity:4 */
+/* jshint bitwise:true, camelcase:true, curly:true, eqeqeq:true, forin:true,
+   freeze:true, futurehostile:true, latedef:true, newcap:true, nocomma:true,
+   nonbsp:true, singleGroups:true, strict:true, undef:true, unused:true,
+   es3:true, esnext:true, plusplus:true, maxparams:2, maxdepth:1,
+   maxstatements:2, maxcomplexity:2 */
 
-/*global module */
+/* eslint strict: 1, max-statements: 1 */
 
-;(function () {
+/* global module */
+
+;(function () { // eslint-disable-line no-extra-semi
+
   'use strict';
 
   var isFunction = require('is-function-x');
@@ -69,11 +72,8 @@
   var sTrim = String.prototype.trim;
   var sSplit = String.prototype.split;
   var sReplace = String.prototype.replace;
-  var ARROW_ARG = /^([^\(]+?)=>/;
-  var FN_ARGS = new RegExp(
-    '^[^\\(]*\\([' + require('white-space-x').ws + ']*([^\\)]*)\\)',
-    'm'
-  );
+  var ARROW_ARG = /^([^(]+?)=>/;
+  var FN_ARGS = new RegExp('^[^\\(]*\\([' + require('white-space-x').ws + ']*([^\\)]*)\\)', 'm');
   var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 
   /**
@@ -84,13 +84,13 @@
    * @param {string} arg The arg to be trimmed and added.
    * @return {Array} The args of the function.
    */
-  function mapper(acc, arg) {
+  var mapper = function (acc, arg) {
     var a = sTrim.call(arg);
     if (a) {
       aPush.call(acc, a);
     }
     return acc;
-  }
+  };
 
   /**
    * This method returns the args of the function, or `undefined` if not
@@ -114,10 +114,11 @@
    */
   module.exports = function getFunctionArgs(fn) {
     if (!isFunction(fn)) {
-      return;
+      return void 0;
     }
     var str = sReplace.call(fToString.call(fn), STRIP_COMMENTS, ' ');
     var match = sMatch.call(str, ARROW_ARG) || sMatch.call(str, FN_ARGS);
-    return match ? aReduce.call(sSplit.call(match[1], ','), mapper, []) : [];
+    var arr = [];
+    return match ? aReduce.call(sSplit.call(match[1], ','), mapper, arr) : arr;
   };
 }());
