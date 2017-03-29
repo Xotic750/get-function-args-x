@@ -27,18 +27,18 @@ Get the named args of a function.
 
 Requires ES3 or above.
 
-**Version**: 1.1.1  
+**Version**: 1.2.0  
 **Author**: Xotic750 <Xotic750@gmail.com>  
 **License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
 **Copyright**: Xotic750  
 <a name="exp_module_get-function-args-x--module.exports"></a>
 
-### `module.exports(fn)` ⇒ <code>undefined</code> &#124; <code>Array</code> ⏏
+### `module.exports(fn)` ⇒ <code>undefined</code> \| <code>Array</code> ⏏
 This method returns the args of the function, or `undefined` if not
 a function.
 
 **Kind**: Exported function  
-**Returns**: <code>undefined</code> &#124; <code>Array</code> - The args of the function, or `undefined` if
+**Returns**: <code>undefined</code> \| <code>Array</code> - The args of the function, or `undefined` if
  not a function.  
 
 | Param | Type | Description |
@@ -58,4 +58,7 @@ getFunctionArgs(function () {}); // []
 getFunctionArgs(new Function ()); // []
 getFunctionArgs(function test() {}); // []
 getFunctionArgs(function test(a, b) {}); // ['a', 'b']
+getFunctionArgs(function* test(a, b) {}); // ['a', 'b']
+getFunctionArgs((a, b) => {}); // ['a', 'b']
+getFunctionArgs(async function test(a, b) {}); // ['a', 'b']
 ```

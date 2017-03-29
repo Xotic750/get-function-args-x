@@ -26,14 +26,14 @@
  *
  * Requires ES3 or above.
  *
- * @version 1.1.1
+ * @version 1.2.0
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
  * @module get-function-args-x
  */
 
-/* eslint strict: 1 */
+/* eslint strict: 1, max-statements: 1 */
 
 /* global module */
 
@@ -46,7 +46,8 @@
   var trim = require('string.prototype.trim');
   var fToString = Function.prototype.toString;
   var ARROW_ARG = /^([^(]+?)=>/;
-  var FN_ARGS = new RegExp('^[^\\(]*\\([' + require('white-space-x').ws + ']*([^\\)]*)\\)', 'm');
+  var s = require('white-space-x').ws;
+  var FN_ARGS = new RegExp('^[^\\(]*\\([' + s + ']*([^\\)]*)\\)', 'm');
   var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 
   /**
@@ -68,6 +69,9 @@
    * getFunctionArgs(new Function ()); // []
    * getFunctionArgs(function test() {}); // []
    * getFunctionArgs(function test(a, b) {}); // ['a', 'b']
+   * getFunctionArgs(function* test(a, b) {}); // ['a', 'b']
+   * getFunctionArgs((a, b) => {}); // ['a', 'b']
+   * getFunctionArgs(async function test(a, b) {}); // ['a', 'b']
    */
   module.exports = function getFunctionArgs(fn) {
     if (!isFunction(fn)) {

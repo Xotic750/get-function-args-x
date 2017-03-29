@@ -10,7 +10,7 @@
    max-statements: 1, array-callback-return: 1, no-unused-vars: 1,
    no-new-func: 1 */
 
-/* global JSON:true, expect, module, require, describe, it, returnExports */
+/* global JSON:true, expect, module, require, describe, it, xit, returnExports */
 
 ;(function () { // eslint-disable-line no-extra-semi
 
@@ -36,6 +36,42 @@
   } else {
     getFunctionArgs = returnExports;
   }
+
+  var getFat = function getFatFunc() {
+    try {
+      return new Function('return (x, y) => {return this;};')();
+    } catch (ignore) {}
+    return false;
+  };
+
+  var ifSupportsFatit = getFat() ? it : xit;
+
+  var getGF = function getGeneratoFunc() {
+    try {
+      return new Function('return function* idMaker(x, y){};')();
+    } catch (ignore) {}
+    return false;
+  };
+
+  var ifSupportsGFit = getGF() ? it : xit;
+
+  var getC = function getClassFunc() {
+    try {
+      return new Function('"use strict"; return class My { constructor (x,y) {} };')();
+    } catch (ignore) {}
+    return false;
+  };
+
+  var ifSupportsCit = getC() ? it : xit;
+
+  var getAF = function getAsyncFunc() {
+    try {
+      return new Function('return async function wait(x, y) {}')();
+    } catch (ignore) {}
+    return false;
+  };
+
+  var ifSupportsAFit = getAF() ? it : xit;
 
   describe('Basic tests', function () {
     it('should return `undefined` for everything', function () {
@@ -91,30 +127,28 @@
       ];
       var actual = values.map(getFunctionArgs);
       expect(actual).toEqual(expected);
+    });
 
-      try {
-        /* jshint evil:true */
-        var fat = new Function('return (x, y) => {return this}')();
-        expect(getFunctionArgs(fat)).toEqual(['x', 'y']);
-      } catch (ignore) {}
+    ifSupportsFatit('should return a correct string for everything', function () {
+      var fat = getFat();
+      expect(getFunctionArgs(fat)).toEqual(['x', 'y']);
+    });
 
-      try {
-        /* jshint evil:true */
-        var gen = new Function('return function* idMaker(x, y){}')();
-        expect(getFunctionArgs(gen)).toEqual(['x', 'y']);
-      } catch (ignore) {}
+    ifSupportsGFit('should return a correct string for everything', function () {
+      var gen = getGF();
+      expect(getFunctionArgs(gen)).toEqual(['x', 'y']);
+    });
 
-      try {
-        /* jshint evil:true */
-        var classes1 = new Function('"use strict"; return class My {};')();
-        expect(getFunctionArgs(classes1)).toEqual([]);
-      } catch (ignore) {}
+    ifSupportsAFit('should return a correct string for everything', function () {
+      var classes = getAF();
+      expect(getFunctionArgs(classes)).toEqual(['x', 'y']);
+    });
 
-      try {
-        /* jshint evil:true */
-        var classes2 = new Function('"use strict"; return class My { constructor (a,b) {} };')();
-        expect(getFunctionArgs(classes2)).toEqual(['a', 'b']);
-      } catch (ignore) {}
+    ifSupportsCit('should return a correct string for everything', function () {
+      var classes = getC();
+      expect(getFunctionArgs(classes)).toEqual(['x', 'y']);
+      var classes1 = new Function('"use strict"; return class My {};')();
+      expect(getFunctionArgs(classes1)).toEqual([]);
     });
   });
 }());
