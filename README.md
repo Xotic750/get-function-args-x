@@ -1,33 +1,29 @@
-<a name="module_get-function-args-x"></a>
-
-## get-function-args-x
 <a href="https://travis-ci.org/Xotic750/get-function-args-x"
-title="Travis status">
+   title="Travis status">
 <img
-src="https://travis-ci.org/Xotic750/get-function-args-x.svg?branch=master"
-alt="Travis status" height="18">
+   src="https://travis-ci.org/Xotic750/get-function-args-x.svg?branch=master"
+   alt="Travis status" height="18"/>
 </a>
 <a href="https://david-dm.org/Xotic750/get-function-args-x"
-title="Dependency status">
+   title="Dependency status">
 <img src="https://david-dm.org/Xotic750/get-function-args-x.svg"
-alt="Dependency status" height="18"/>
+   alt="Dependency status" height="18"/>
 </a>
-<a
-href="https://david-dm.org/Xotic750/get-function-args-x#info=devDependencies"
-title="devDependency status">
+<a href="https://david-dm.org/Xotic750/get-function-args-x#info=devDependencies"
+   title="devDependency status">
 <img src="https://david-dm.org/Xotic750/get-function-args-x/dev-status.svg"
-alt="devDependency status" height="18"/>
+   alt="devDependency status" height="18"/>
 </a>
 <a href="https://badge.fury.io/js/get-function-args-x" title="npm version">
 <img src="https://badge.fury.io/js/get-function-args-x.svg"
-alt="npm version" height="18">
+   alt="npm version" height="18"/>
 </a>
+<a name="module_get-function-args-x"></a>
 
-Get the named args of a function.
+## get-function-args-x
+Get the args of the function.
 
-Requires ES3 or above.
-
-**Version**: 1.2.0  
+**Version**: 2.0.0  
 **Author**: Xotic750 <Xotic750@gmail.com>  
 **License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
 **Copyright**: Xotic750  
