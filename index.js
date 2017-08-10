@@ -1,6 +1,6 @@
 /**
  * @file Get the args of the function.
- * @version 2.0.0
+ * @version 2.0.1
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -9,7 +9,7 @@
 
 'use strict';
 
-var forEach = require('for-each');
+var forEach = require('array-for-each-x');
 var trim = require('trim-x');
 var fToString = Function.prototype.toString;
 var ARROW_ARG = /^([^(]+?)=>/;
