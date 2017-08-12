@@ -1,6 +1,6 @@
 /**
  * @file Get the args of the function.
- * @version 2.0.1
+ * @version 2.0.3
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -9,23 +9,14 @@
 
 'use strict';
 
-var forEach = require('array-for-each-x');
+var reduce = require('array-reduce-x');
+var replaceComments = require('replace-comments-x');
+var normalise = require('normalize-space-x');
 var trim = require('trim-x');
 var fToString = Function.prototype.toString;
 var ARROW_ARG = /^([^(]+?)=>/;
-var s = require('white-space-x').ws;
-var FN_ARGS = new RegExp('^[^\\(]*\\([' + s + ']*([^\\)]*)\\)', 'm');
-var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
-var isFunctionLike;
-try {
-  // eslint-disable-next-line no-new-func
-  new Function('"use strict"; return class My {};')();
-  isFunctionLike = function _isFunctionLike(value) {
-    return typeof value === 'function';
-  };
-} catch (ignore) {
-  isFunctionLike = require('is-function-x');
-}
+var FN_ARGS = /^[^(]*\( *([^)]*)\)/m;
+var isFunction = require('is-function-x');
 
 /**
  * This method returns the args of the function, or `undefined` if not
@@ -51,27 +42,24 @@ try {
  * getFunctionArgs(async function test(a, b) {}); // ['a', 'b']
  */
 module.exports = function getFunctionArgs(fn) {
-  if (isFunctionLike(fn) === false) {
+  if (isFunction(fn, true) === false) {
     return void 0;
   }
 
   var str;
   try {
-    str = fToString.call(fn).replace(STRIP_COMMENTS, ' ');
+    str = normalise(replaceComments(fToString.call(fn), ' '));
   } catch (ignore) {
     return '';
   }
 
   var match = str.match(ARROW_ARG) || str.match(FN_ARGS);
-  var arr = [];
-  if (match) {
-    forEach(match[1].split(','), function reducer(item) {
-      var a = trim(item);
-      if (a) {
-        arr.push(a);
-      }
-    });
-  }
+  return reduce(match ? match[1].split(',') : [], function reducer(acc, item) {
+    var a = trim(item);
+    if (a) {
+      acc.push(a);
+    }
 
-  return arr;
+    return acc;
+  }, []);
 };
