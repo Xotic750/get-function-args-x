@@ -1,6 +1,6 @@
 /**
  * @file Get the args of the function.
- * @version 2.0.4
+ * @version 2.1.0
  * @author Xotic750 <Xotic750@gmail.com>
  * @copyright  Xotic750
  * @license {@link <https://opensource.org/licenses/MIT> MIT}
@@ -9,14 +9,26 @@
 
 'use strict';
 
+var attempt = require('attempt-x');
 var reduce = require('array-reduce-x');
 var replaceComments = require('replace-comments-x');
 var normalise = require('normalize-space-x');
 var trim = require('trim-x');
 var fToString = Function.prototype.toString;
+var sMatch = String.prototype.match;
+var sSplit = String.prototype.split;
 var ARROW_ARG = /^([^(]+?)=>/;
 var FN_ARGS = /^[^(]*\( *([^)]*)\)/m;
 var isFunction = require('is-function-x');
+
+var reducer = function _reducer(acc, item) {
+  var a = trim(item);
+  if (a) {
+    acc[acc.length] = a;
+  }
+
+  return acc;
+};
 
 /**
  * This method returns the args of the function, or `undefined` if not
@@ -46,20 +58,12 @@ module.exports = function getFunctionArgs(fn) {
     return void 0;
   }
 
-  var str;
-  try {
-    str = normalise(replaceComments(fToString.call(fn), ' '));
-  } catch (ignore) {
+  var result = attempt.call(fn, fToString);
+  if (result.threw) {
     return '';
   }
 
-  var match = str.match(ARROW_ARG) || str.match(FN_ARGS);
-  return reduce(match ? match[1].split(',') : [], function reducer(acc, item) {
-    var a = trim(item);
-    if (a) {
-      acc.push(a);
-    }
-
-    return acc;
-  }, []);
+  var str = normalise(replaceComments(result.value, ' '));
+  var match = sMatch.call(str, ARROW_ARG) || sMatch.call(str, FN_ARGS);
+  return reduce(match ? sSplit.call(match[1], ',') : [], reducer, []);
 };
