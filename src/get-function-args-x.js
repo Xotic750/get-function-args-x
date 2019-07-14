@@ -7,22 +7,22 @@
  * @module get-function-args-x
  */
 
-'use strict';
+const attempt = require('attempt-x');
+const reduce = require('array-reduce-x');
+const replaceComments = require('replace-comments-x');
+const normalise = require('normalize-space-x');
+const trim = require('trim-x');
 
-var attempt = require('attempt-x');
-var reduce = require('array-reduce-x');
-var replaceComments = require('replace-comments-x');
-var normalise = require('normalize-space-x');
-var trim = require('trim-x');
-var fToString = Function.prototype.toString;
-var sMatch = String.prototype.match;
-var sSplit = String.prototype.split;
-var ARROW_ARG = /^([^(]+?)=>/;
-var FN_ARGS = /^[^(]*\( *([^)]*)\)/m;
-var isFunction = require('is-function-x');
+const fToString = Function.prototype.toString;
+const sMatch = String.prototype.match;
+const sSplit = String.prototype.split;
+const ARROW_ARG = /^([^(]+?)=>/;
+const FN_ARGS = /^[^(]*\( *([^)]*)\)/m;
+const isFunction = require('is-function-x');
 
-var reducer = function _reducer(acc, item) {
-  var a = trim(item);
+const reducer = function _reducer(acc, item) {
+  const a = trim(item);
+
   if (a) {
     acc[acc.length] = a;
   }
@@ -58,12 +58,14 @@ module.exports = function getFunctionArgs(fn) {
     return void 0;
   }
 
-  var result = attempt.call(fn, fToString);
+  const result = attempt.call(fn, fToString);
+
   if (result.threw) {
     return '';
   }
 
-  var str = normalise(replaceComments(result.value, ' '));
-  var match = sMatch.call(str, ARROW_ARG) || sMatch.call(str, FN_ARGS);
+  const str = normalise(replaceComments(result.value, ' '));
+  const match = sMatch.call(str, ARROW_ARG) || sMatch.call(str, FN_ARGS);
+
   return reduce(match ? sSplit.call(match[1], ',') : [], reducer, []);
 };
