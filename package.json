@@ -50,11 +50,11 @@
   },
   "dependencies": {
     "array-reduce-x": "^2.1.0",
-    "attempt-x": "^2.0.3",
-    "is-function-x": "^4.0.6",
-    "normalize-space-x": "^4.0.15",
-    "replace-comments-x": "^3.0.4",
-    "trim-x": "^4.0.4"
+    "attempt-x": "^2.0.4",
+    "is-function-x": "^4.0.8",
+    "normalize-space-x": "^4.0.17",
+    "replace-comments-x": "^3.0.5",
+    "trim-x": "^4.0.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
