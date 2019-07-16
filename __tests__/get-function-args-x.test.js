@@ -69,6 +69,7 @@ const ifSupportsAFit = getAF() ? it : xit;
 
 describe('basic tests', function() {
   it('should return `undefined` for everything', function() {
+    expect.assertions(1);
     const values = [true, 'abc', 1, null, undefined, new Date(), [], /r/];
 
     const expected = new Array(values.length).fill();
@@ -77,6 +78,7 @@ describe('basic tests', function() {
   });
 
   it('should return a correct args for everything', function() {
+    expect.assertions(1);
     const values = [
       Object,
       String,
@@ -129,21 +131,25 @@ describe('basic tests', function() {
   });
 
   ifSupportsFatit('should return a correct string for everything', function() {
+    expect.assertions(1);
     const fat = getFat();
     expect(getFunctionArgs(fat)).toStrictEqual(['x', 'y']);
   });
 
   ifSupportsGFit('should return a correct string for everything', function() {
+    expect.assertions(1);
     const gen = getGF();
     expect(getFunctionArgs(gen)).toStrictEqual(['x', 'y']);
   });
 
   ifSupportsAFit('should return a correct string for everything', function() {
+    expect.assertions(1);
     const classes = getAF();
     expect(getFunctionArgs(classes)).toStrictEqual(['x', 'y']);
   });
 
   ifSupportsCit('should return a correct string for everything', function() {
+    expect.assertions(1);
     const classes = getC();
     expect(getFunctionArgs(classes)).toStrictEqual(['x', 'y']);
     // eslint-disable-next-line no-new-func
