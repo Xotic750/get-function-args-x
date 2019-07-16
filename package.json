@@ -49,12 +49,12 @@
     "url": "https://github.com/Xotic750/get-function-args-x/issues"
   },
   "dependencies": {
-    "array-reduce-x": "^3.0.2",
-    "attempt-x": "^2.0.5",
-    "is-function-x": "^4.0.10",
-    "normalize-space-x": "^4.0.19",
-    "replace-comments-x": "^3.0.7",
-    "trim-x": "^4.0.8"
+    "array-reduce-x": "^3.0.3",
+    "attempt-x": "^2.0.6",
+    "is-function-x": "^4.0.11",
+    "normalize-space-x": "^4.0.20",
+    "replace-comments-x": "^3.0.8",
+    "trim-x": "^4.0.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",

@@ -1,31 +1,7 @@
 let getFunctionArgs;
 
-if (typeof module === 'object' && module.exports) {
-  require('es5-shim');
-  require('es5-shim/es5-sham');
-
-  if (typeof JSON === 'undefined') {
-    JSON = {};
-  }
-
-  require('json3').runInContext(null, JSON);
-  require('es6-shim');
-  const es7 = require('es7-shim');
-  Object.keys(es7).forEach(function(key) {
-    const obj = es7[key];
-
-    if (typeof obj.shim === 'function') {
-      obj.shim();
-    }
-  });
-  getFunctionArgs = require('../../index.js');
-} else {
-  getFunctionArgs = returnExports;
-}
-
 const getFat = function getFatFunc() {
   try {
-    // eslint-disable-next-line no-new-func
     return new Function('return (x, y) => {return this;};')();
   } catch (ignore) {
     // empty
@@ -38,7 +14,6 @@ const ifSupportsFatit = getFat() ? it : xit;
 
 const getGF = function getGeneratoFunc() {
   try {
-    // eslint-disable-next-line no-new-func
     return new Function('return function* idMaker(x, y){};')();
   } catch (ignore) {
     // empty
@@ -51,7 +26,6 @@ const ifSupportsGFit = getGF() ? it : xit;
 
 const getC = function getClassFunc() {
   try {
-    // eslint-disable-next-line no-new-func
     return new Function('"use strict"; return class My { constructor (x,y) {} };')();
   } catch (ignore) {
     // empty
@@ -64,7 +38,6 @@ const ifSupportsCit = getC() ? it : xit;
 
 const getAF = function getAsyncFunc() {
   try {
-    // eslint-disable-next-line no-new-func
     return new Function('return async function wait(x, y) {}')();
   } catch (ignore) {
     // empty
@@ -96,7 +69,7 @@ describe('basic tests', function() {
       function() {},
       // eslint-disable-next-line no-unused-vars
       function test(a) {},
-      // eslint-disable-next-line no-new-func
+
       new Function(),
       // eslint-disable-next-line no-unused-vars
       function test1(a, b) {},
@@ -160,7 +133,7 @@ describe('basic tests', function() {
     expect.assertions(1);
     const classes = getC();
     expect(getFunctionArgs(classes)).toStrictEqual(['x', 'y']);
-    // eslint-disable-next-line no-new-func
+
     const classes1 = new Function('"use strict"; return class My {};')();
     expect(getFunctionArgs(classes1)).toStrictEqual([]);
   });
