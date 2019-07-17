@@ -30,7 +30,7 @@ const reducer = function _reducer(acc, item) {
  * @returns {undefined|Array} The args of the function, or `undefined` if
  *  not a function.
  */
-export default function getFunctionArgs(fn) {
+const getFunctionArgs = function getFunctionArgs(fn) {
   if (isFunction(fn, true) === false) {
     return void 0;
   }
@@ -45,4 +45,6 @@ export default function getFunctionArgs(fn) {
   const match = sMatch.call(str, ARROW_ARG) || sMatch.call(str, FN_ARGS);
 
   return reduce(match ? sSplit.call(match[1], ',') : [], reducer, []);
-}
+};
+
+export default getFunctionArgs;
