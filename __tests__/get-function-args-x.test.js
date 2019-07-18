@@ -1,4 +1,4 @@
-let getFunctionArgs;
+import getFunctionArgs from '../src/get-function-args-x';
 
 const getFat = function getFatFunc() {
   try {
@@ -67,26 +67,34 @@ describe('basic tests', function() {
       Array,
       Function,
       function() {},
-      // eslint-disable-next-line no-unused-vars
-      function test(a) {},
+      function test(a) {
+        return [a];
+      },
 
       new Function(),
-      // eslint-disable-next-line no-unused-vars
-      function test1(a, b) {},
-      // eslint-disable-next-line no-unused-vars
-      function test2(a /* , foo */) {},
-      // eslint-disable-next-line no-unused-vars
-      function test3(a /* , foo */, b) {},
-      // eslint-disable-next-line no-unused-vars
-      function test4(a /* , foo */, b) {},
-      // eslint-disable-next-line no-unused-vars
-      function /* foo */ test5(a /* , foo */, b) {},
-      // eslint-disable-next-line no-unused-vars
-      function /* foo */ test6 /* bar */(a /* , foo */, b) {},
+      function test1(a, b) {
+        return [a, b];
+      },
+      function test2(a /* , foo */) {
+        return [a];
+      },
+      function test3(a /* , foo */, b) {
+        return [a, b];
+      },
+      function test4(a /* , foo */, b) {
+        return [a, b];
+      },
+      function /* foo */ test5(a /* , foo */, b) {
+        return [a, b];
+      },
+      function /* foo */ test6 /* bar */(a /* , foo */, b) {
+        return [a, b];
+      },
       function /* foo */ test7 /* bar */(/* baz */) {},
       /* fum */ function /* foo */ // blah
-      // eslint-disable-next-line no-unused-vars
-      test8(/* baz */ a) {},
+      test8(/* baz */ a) {
+        return [a];
+      },
     ];
 
     const expected = [
@@ -130,7 +138,7 @@ describe('basic tests', function() {
   });
 
   ifSupportsCit('should return a correct string for everything', function() {
-    expect.assertions(1);
+    expect.assertions(2);
     const classes = getC();
     expect(getFunctionArgs(classes)).toStrictEqual(['x', 'y']);
 

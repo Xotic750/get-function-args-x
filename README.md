@@ -21,37 +21,36 @@
 <a name="module_get-function-args-x"></a>
 
 ## get-function-args-x
-Get the args of the function.
 
-**Version**: 2.1.0  
-**Author**: Xotic750 <Xotic750@gmail.com>  
-**License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
-**Copyright**: Xotic750  
+Get the args of the function.
+ 
 <a name="exp_module_get-function-args-x--module.exports"></a>
 
 ### `module.exports(fn)` ⇒ <code>undefined</code> \| <code>Array</code> ⏏
+
 This method returns the args of the function, or `undefined` if not
 a function.
 
 **Kind**: Exported function  
 **Returns**: <code>undefined</code> \| <code>Array</code> - The args of the function, or `undefined` if
- not a function.  
+not a function.
 
-| Param | Type | Description |
-| --- | --- | --- |
-| fn | <code>function</code> | The function to get the args of. |
+| Param | Type                  | Description                      |
+| ----- | --------------------- | -------------------------------- |
+| fn    | <code>function</code> | The function to get the args of. |
 
-**Example**  
+**Example**
+
 ```js
-var getFunctionArgs = require('get-function-args-x');
+import getFunctionArgs from 'get-function-args-x';
 
 getFunctionArgs(); // undefined
 getFunctionArgs(Number.MIN_VALUE); // undefined
 getFunctionArgs('abc'); // undefined
 getFunctionArgs(true); // undefined
-getFunctionArgs({ name: 'abc' }); // undefined
-getFunctionArgs(function () {}); // []
-getFunctionArgs(new Function ()); // []
+getFunctionArgs({name: 'abc'}); // undefined
+getFunctionArgs(function() {}); // []
+getFunctionArgs(new Function()); // []
 getFunctionArgs(function test() {}); // []
 getFunctionArgs(function test(a, b) {}); // ['a', 'b']
 getFunctionArgs(function* test(a, b) {}); // ['a', 'b']
