@@ -1,6 +1,6 @@
 {
   "name": "get-function-args-x",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Get the args of the function.",
   "homepage": "https://github.com/Xotic750/get-function-args-x",
   "author": {
@@ -49,12 +49,12 @@
     "url": "https://github.com/Xotic750/get-function-args-x/issues"
   },
   "dependencies": {
-    "array-reduce-x": "^3.0.6",
-    "attempt-x": "^2.0.11",
-    "is-function-x": "^4.0.17",
-    "normalize-space-x": "^4.0.26",
-    "replace-comments-x": "^3.0.14",
-    "trim-x": "^4.0.15"
+    "array-reduce-x": "^3.0.7",
+    "attempt-x": "^2.0.12",
+    "is-function-x": "^4.0.18",
+    "normalize-space-x": "^4.0.27",
+    "replace-comments-x": "^3.0.15",
+    "trim-x": "^4.0.16"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
