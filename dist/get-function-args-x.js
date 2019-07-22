@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2015-2017",
-  "date": "2019-07-21T23:31:38.594Z",
+  "date": "2019-07-22T13:32:53.645Z",
   "describe": "",
   "description": "Get the args of the function.",
   "file": "get-function-args-x.js",
   "hash": "7644580600cf89082f92",
   "license": "MIT",
-  "version": "3.0.3"
+  "version": "3.0.4"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
