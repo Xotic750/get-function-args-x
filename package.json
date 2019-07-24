@@ -1,6 +1,6 @@
 {
   "name": "get-function-args-x",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Get the args of the function.",
   "homepage": "https://github.com/Xotic750/get-function-args-x",
   "author": {
@@ -22,6 +22,7 @@
   ],
   "module": "dist/get-function-args-x.esm.js",
   "main": "dist/get-function-args-x.js",
+  "jsdelivr": "dist/get-function-args-x.min.js",
   "scripts": {
     "build:esm": "mkdirp dist && babel -s true --env-name esm src/get-function-args-x.js -o dist/get-function-args-x.esm.js",
     "build:base": "webpack --bail --progress --profile --colors",
@@ -49,12 +50,12 @@
     "url": "https://github.com/Xotic750/get-function-args-x/issues"
   },
   "dependencies": {
-    "array-reduce-x": "^3.0.10",
-    "attempt-x": "^2.0.16",
-    "is-function-x": "^4.0.21",
-    "normalize-space-x": "^4.0.31",
-    "replace-comments-x": "^3.0.18",
-    "trim-x": "^4.0.20"
+    "array-reduce-x": "^3.0.11",
+    "attempt-x": "^2.0.18",
+    "is-function-x": "^4.0.23",
+    "normalize-space-x": "^4.0.33",
+    "replace-comments-x": "^3.0.20",
+    "trim-x": "^4.0.22"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -92,7 +93,7 @@
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.13.6",
-    "eslint-plugin-jsdoc": "^15.7.1",
+    "eslint-plugin-jsdoc": "^15.7.2",
     "eslint-plugin-json": "^1.4.0",
     "eslint-plugin-lodash": "^5.1.0",
     "eslint-plugin-no-use-extend-native": "^0.4.1",

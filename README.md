@@ -1,23 +1,31 @@
 <a href="https://travis-ci.org/Xotic750/get-function-args-x"
-   title="Travis status">
+  title="Travis status">
 <img
-   src="https://travis-ci.org/Xotic750/get-function-args-x.svg?branch=master"
-   alt="Travis status" height="18"/>
+  src="https://travis-ci.org/Xotic750/get-function-args-x.svg?branch=master"
+  alt="Travis status" height="18">
 </a>
 <a href="https://david-dm.org/Xotic750/get-function-args-x"
-   title="Dependency status">
-<img src="https://david-dm.org/Xotic750/get-function-args-x.svg"
-   alt="Dependency status" height="18"/>
+  title="Dependency status">
+<img src="https://david-dm.org/Xotic750/get-function-args-x/status.svg"
+  alt="Dependency status" height="18"/>
 </a>
-<a href="https://david-dm.org/Xotic750/get-function-args-x#info=devDependencies"
-   title="devDependency status">
+<a
+  href="https://david-dm.org/Xotic750/get-function-args-x?type=dev"
+  title="devDependency status">
 <img src="https://david-dm.org/Xotic750/get-function-args-x/dev-status.svg"
-   alt="devDependency status" height="18"/>
+  alt="devDependency status" height="18"/>
 </a>
-<a href="https://badge.fury.io/js/get-function-args-x" title="npm version">
+<a href="https://badge.fury.io/js/get-function-args-x"
+  title="npm version">
 <img src="https://badge.fury.io/js/get-function-args-x.svg"
-   alt="npm version" height="18"/>
+  alt="npm version" height="18">
 </a>
+<a href="https://www.jsdelivr.com/package/npm/get-function-args-x"
+  title="jsDelivr hits">
+<img src="https://data.jsdelivr.com/v1/package/npm/get-function-args-x/badge?style=rounded"
+  alt="jsDelivr hits" height="18">
+</a>
+
 <a name="module_get-function-args-x"></a>
 
 ## get-function-args-x
