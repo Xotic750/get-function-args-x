@@ -53,9 +53,9 @@
   "dependencies": {
     "array-reduce-x": "^3.1.0",
     "attempt-x": "^2.1.0",
-    "is-function-x": "^4.1.0",
     "normalize-space-x": "^4.1.0",
     "replace-comments-x": "^3.1.0",
+    "simple-methodize-x": "^1.0.2",
     "trim-x": "^4.1.0"
   },
   "devDependencies": {
