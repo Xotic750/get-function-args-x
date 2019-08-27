@@ -2,7 +2,7 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2015-2017",
-  "date": "2019-08-20T20:31:31.697Z",
+  "date": "2019-08-27T21:23:53.033Z",
   "describe": "",
   "description": "Get the args of the function.",
   "file": "get-function-args-x.js",
